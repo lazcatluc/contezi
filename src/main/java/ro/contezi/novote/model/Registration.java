@@ -1,6 +1,11 @@
 package ro.contezi.novote.model;
 
-public class Registration {
+import java.io.Serializable;
+
+public class Registration implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	private User user;
 	private Candidate candidate;
 	
