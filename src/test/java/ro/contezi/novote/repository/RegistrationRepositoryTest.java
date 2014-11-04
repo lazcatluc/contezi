@@ -15,6 +15,7 @@ public class RegistrationRepositoryTest {
 	@Before
 	public void setUp() {
 		registrationRepository = new SetRegistrationRepository();
+		SetRegistrationRepository.REGISTRATIONS.clear();
 	}
 	
 	@Test
@@ -22,5 +23,12 @@ public class RegistrationRepositoryTest {
 		registrationRepository.saveRegistration(Registration.SOMETHING);
 		
 		assertTrue(registrationRepository.hasEmailRegistration(User.SOMEONE.getEmail()));
+	}
+	
+	@Test
+	public void hasCnpAfterAddingRegistration() throws Exception {
+		registrationRepository.saveRegistration(Registration.SOMETHING);
+		
+		assertTrue(registrationRepository.hasCnpRegistration(User.SOMEONE.getCnp()));
 	}
 }

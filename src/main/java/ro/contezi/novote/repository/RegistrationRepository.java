@@ -7,4 +7,6 @@ public interface RegistrationRepository {
 	void saveRegistration(Registration registration) throws MultipleRegistrationException;
 
 	boolean hasEmailRegistration(String email);
+
+	boolean hasCnpRegistration(String cnp);
 }

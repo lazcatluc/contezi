@@ -31,4 +31,9 @@ public class SetRegistrationRepository implements RegistrationRepository, Serial
 		return REGISTRATIONS.stream().anyMatch(registration -> Objects.equals(registration.getUser().getEmail(), email));
 	}
 
+	@Override
+	public boolean hasCnpRegistration(String cnp) {
+		return REGISTRATIONS.stream().anyMatch(registration -> Objects.equals(registration.getUser().getCnp(), cnp));
+	}
+
 }

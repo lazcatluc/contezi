@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import ro.contezi.novote.controller.Registrations;
+import ro.contezi.novote.validator.EmailValidator;
 
 @RunWith(Parameterized.class)
 public class EmailTest {
@@ -20,7 +20,7 @@ public class EmailTest {
 		
 	@Test
 	public void validatesEmail() throws Exception {
-		assertEquals(valid, validate(Registrations.EMAIL_PATTERN, email));
+		assertEquals(valid, validate(EmailValidator.PATTERN, email));
 	}
 	
 	public boolean validate(String regex, String email) {

@@ -29,7 +29,7 @@
         			</td>
         			<td>
         				<h:inputText id="email" value="#{registrations.currentUser.email}" 
-        							 validator="#{registrations.emailValidator}" />
+        							 validator="#{emailValidator.emailValidator}" />
         			</td>
         			<td>
         				<h:message for="email" />
@@ -41,7 +41,7 @@
         			</td>
         			<td>
         				<h:inputText id="cnp" value="#{registrations.currentUser.cnp}" 
-        							 validator="#{registrations.cnpValidator}" />
+        							 validator="#{cnpValidator.cnpValidator}" />
         			</td>
         			<td>
         				<h:message for="cnp" />
