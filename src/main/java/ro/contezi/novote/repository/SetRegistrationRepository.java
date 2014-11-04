@@ -3,6 +3,7 @@ package ro.contezi.novote.repository;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import ro.contezi.novote.exception.MultipleRegistrationException;
@@ -23,6 +24,11 @@ public class SetRegistrationRepository implements RegistrationRepository, Serial
 			throw new MultipleRegistrationException();
 		};
 
+	}
+
+	@Override
+	public boolean hasEmailRegistration(String email) {
+		return REGISTRATIONS.stream().anyMatch(registration -> Objects.equals(registration.getUser().getEmail(), email));
 	}
 
 }

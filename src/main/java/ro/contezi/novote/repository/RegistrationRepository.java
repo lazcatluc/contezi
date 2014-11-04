@@ -5,4 +5,6 @@ import ro.contezi.novote.model.Registration;
 
 public interface RegistrationRepository {
 	void saveRegistration(Registration registration) throws MultipleRegistrationException;
+
+	boolean hasEmailRegistration(String email);
 }

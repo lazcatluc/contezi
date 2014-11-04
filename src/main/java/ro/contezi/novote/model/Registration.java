@@ -6,8 +6,19 @@ public class Registration implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	public static final Registration SOMETHING = new Registration(User.SOMEONE, Candidate.SOMEONE);
+	
 	private User user;
 	private Candidate candidate;
+	
+	public Registration() {
+		
+	}
+	
+	public Registration(User someUser, Candidate someCandidate) {
+		this.user = someUser;
+		this.candidate = someCandidate;
+	}
 	
 	public User getUser() {
 		return user;
