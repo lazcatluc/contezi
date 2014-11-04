@@ -7,6 +7,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.RegexValidator;
 
 import ro.contezi.novote.model.Candidate;
 import ro.contezi.novote.model.Registration;
@@ -19,7 +20,8 @@ public class Registrations implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final java.util.logging.Logger LOGGER = java.util.logging.Logger
-			.getLogger(Candidates.class.getName());		
+			.getLogger(Candidates.class.getName());
+	public static final String EMAIL_PATTERN = "(([^\\.][A-Za-z0-9._%+-]*)|(\"[^\\.][A-Za-z0-9._%+-]*\"))@(([A-Za-z0-9.-]+\\.[A-Za-z0-9.-]{2,4})|(\\[[0-9\\.]+\\]))";		
 	
 	@Inject
 	private RegistrationRepository registrationRepository;
@@ -44,7 +46,9 @@ public class Registrations implements Serializable {
 	}
 	
 	public void emailValidator(FacesContext context, UIComponent component, Object params) {
-		LOGGER.info("Validating: "+context+" - "+component+" - "+params);
+		RegexValidator emailValidator = new RegexValidator();
+		emailValidator.setPattern(EMAIL_PATTERN);
+		emailValidator.validate(context, component, params);
 	}
 	
 	public void cnpValidator(FacesContext context, UIComponent component, Object params) {
