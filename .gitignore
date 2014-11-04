@@ -19,6 +19,7 @@ nb-configuration.xml
 .metadata
 .gradle
 bin/
+target/
 tmp/
 *.tmp
 *.bak
