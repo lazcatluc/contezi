@@ -23,6 +23,7 @@ public class RegistrationsTest {
 		registrations.setCurrentCandidate(candidate);
 		registrations.setCurrentUser(user);
 		registrations.setRegistrationRepository(new SetRegistrationRepository());
+		SetRegistrationRepository.REGISTRATIONS.clear();
 	}
 	
 	@Test
