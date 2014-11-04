@@ -24,11 +24,17 @@ public class RegistrationsTest {
 	}
 	
 	@Test
-	public void userCanRegisterToVoteForACandidate() throws Exception {
+	public void userCanRegisterToVote() throws Exception {
+		Registration registration = registrations.register(user, candidate);
+		
+		assertEquals(user, registration.getUser());
+	}
+	
+	@Test
+	public void candidateCanReceiveVote() throws Exception {
 		Registration registration = registrations.register(user, candidate);
 		
 		assertEquals(candidate, registration.getCandidate());
-		assertEquals(user, registration.getUser());
 	}
 
 	@Test(expected = MultipleRegistrationException.class)
