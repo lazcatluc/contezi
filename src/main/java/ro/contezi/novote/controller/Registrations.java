@@ -44,11 +44,11 @@ public class Registrations implements Serializable {
 	}
 	
 	public void emailValidator(FacesContext context, UIComponent component, Object params) {
-		
+		LOGGER.info("Validating: "+context+" - "+component+" - "+params);
 	}
 	
 	public void cnpValidator(FacesContext context, UIComponent component, Object params) {
-		
+		LOGGER.info("Validating: "+context+" - "+component+" - "+params);
 	}
 
 	public RegistrationRepository getRegistrationRepository() {
