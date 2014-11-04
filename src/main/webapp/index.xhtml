@@ -17,7 +17,10 @@
         				<h:outputText value="#{msg.name}" />			
         			</td>
         			<td>
-        				<h:inputText value="#{registrations.currentUser.name}" />
+        				<h:inputText id="name" value="#{registrations.currentUser.name}" />
+        			</td>
+        			<td>
+        				<h:message for="name" />
         			</td>
         		</tr>
         		<tr>
@@ -25,8 +28,11 @@
         				<h:outputText value="#{msg.email}" />			
         			</td>
         			<td>
-        				<h:inputText value="#{registrations.currentUser.email}" 
+        				<h:inputText id="email" value="#{registrations.currentUser.email}" 
         							 validator="#{registrations.emailValidator}" />
+        			</td>
+        			<td>
+        				<h:message for="email" />
         			</td>
         		</tr>
         		<tr>
@@ -34,8 +40,11 @@
         				<h:outputText value="#{msg.cnp}" />			
         			</td>
         			<td>
-        				<h:inputText value="#{registrations.currentUser.cnp}" 
+        				<h:inputText id="cnp" value="#{registrations.currentUser.cnp}" 
         							 validator="#{registrations.cnpValidator}" />
+        			</td>
+        			<td>
+        				<h:message for="cnp" />
         			</td>
         		</tr>
         		<tr>
@@ -43,7 +52,10 @@
         				<h:outputText value="#{msg.city}" />			
         			</td>
         			<td>
-        				<h:inputText value="#{registrations.currentUser.city}" />
+        				<h:inputText id="city" value="#{registrations.currentUser.city}" />
+        			</td>
+        			<td>
+        				<h:message for="city" />
         			</td>
         		</tr>
         		<tr>
@@ -51,7 +63,10 @@
         				<h:outputText value="#{msg.country}" />			
         			</td>
         			<td>
-        				<h:inputText value="#{registrations.currentUser.country}" />
+        				<h:inputText id="country" value="#{registrations.currentUser.country}" />
+        			</td>
+        			<td>
+        				<h:message for="country" />
         			</td>
         		</tr>
         		<tr>
@@ -59,16 +74,19 @@
         				<h:outputText value="#{msg.candidate}" />			
         			</td>
         			<td>
-        				<h:selectOneMenu value="#{registrations.currentCandidate.name}">
+        				<h:selectOneMenu id="candidate" value="#{registrations.currentCandidate.name}">
         					<f:selectItems value="#{candidates.allCandidates}" 
       								var="candidate"
       								itemValue="#{candidate.name}" 
       								itemLabel="#{candidate.name}"/>
         				</h:selectOneMenu>
         			</td>
+        			<td>
+        				<h:message for="candidate" />
+        			</td>
         		</tr>
         		<tr>
-        			<td colspan="2">
+        			<td colspan="3">
         				<h:commandButton value="#{msg.vote}" rendered="#{!registrations.success}">
         					<f:ajax event="click" listener="#{registrations.register()}" 
         							execute="@form" render="@form" />
