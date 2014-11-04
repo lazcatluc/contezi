@@ -1,6 +1,6 @@
 package ro.contezi.novote;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +20,8 @@ public class RegistrationsTest {
 	@Before
 	public void setUp() {
 		registrations = new Registrations();
+		registrations.setCurrentCandidate(candidate);
+		registrations.setCurrentUser(user);
 		registrations.setRegistrationRepository(new SetRegistrationRepository());
 	}
 	
@@ -37,9 +39,16 @@ public class RegistrationsTest {
 		assertEquals(candidate, registration.getCandidate());
 	}
 
+	@Test
+	public void showsSuccessMessageAfterRegistration() throws Exception {
+		registrations.register();
+		
+		assertTrue(registrations.isSuccess());
+	}
+	
 	@Test(expected = MultipleRegistrationException.class)
 	public void userCannotRegisterTwiceForACandidate() throws Exception {
-		registrations.register(user, candidate);
-		registrations.register(user, candidate);
+		registrations.register();
+		registrations.register();
 	}
 }

@@ -6,16 +6,16 @@ public class Candidate implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final Candidate SOMEONE = new Candidate() {
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public String getName() {
-			return "SOMEONE";
-		}
-	};
+	public static final Candidate SOMEONE = new Candidate();	
+	private String name = "";
 	
-	private String name;
+	public Candidate() {
+		
+	}
+	
+	public Candidate(String name) {
+		this.name = name;
+	}
 
 	public String getName() {
 		return name;

@@ -1,8 +1,9 @@
 package ro.contezi.novote.controller;
 
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,7 +12,7 @@ import java.io.Serializable;
  * Time: 11:49 AM
  * To change this template use File | Settings | File Templates.
  */
-@Named("mySessionBean")
+@ManagedBean(name = "mySessionBean")
 @SessionScoped
 public class MySessionBean implements Serializable {
     private static final long serialVersionUID = 1l;

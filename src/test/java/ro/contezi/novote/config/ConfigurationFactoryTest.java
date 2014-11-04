@@ -46,7 +46,7 @@ public class ConfigurationFactoryTest {
         };
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     protected InjectionPoint mockInjectionPoint(String memberName, String annotationConfigName) {
 
         Config mockConfig = mock(Config.class);

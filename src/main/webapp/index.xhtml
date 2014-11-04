@@ -10,5 +10,73 @@
     </h:head>
     <h:body>
         <h:outputText value="#{msg.welcomeMessage}" />
+        <h:form>
+        	<table>
+        		<tr>
+        			<td>
+        				<h:outputText value="#{msg.name}" />			
+        			</td>
+        			<td>
+        				<h:inputText value="#{registrations.currentUser.name}" />
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>
+        				<h:outputText value="#{msg.email}" />			
+        			</td>
+        			<td>
+        				<h:inputText value="#{registrations.currentUser.email}" 
+        							 validator="#{registrations.emailValidator}" />
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>
+        				<h:outputText value="#{msg.cnp}" />			
+        			</td>
+        			<td>
+        				<h:inputText value="#{registrations.currentUser.cnp}" 
+        							 validator="#{registrations.cnpValidator}" />
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>
+        				<h:outputText value="#{msg.city}" />			
+        			</td>
+        			<td>
+        				<h:inputText value="#{registrations.currentUser.city}" />
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>
+        				<h:outputText value="#{msg.country}" />			
+        			</td>
+        			<td>
+        				<h:inputText value="#{registrations.currentUser.country}" />
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>
+        				<h:outputText value="#{msg.candidate}" />			
+        			</td>
+        			<td>
+        				<h:selectOneMenu value="#{registrations.currentCandidate.name}">
+        					<f:selectItems value="#{candidates.allCandidates}" 
+      								var="candidate"
+      								itemValue="#{candidate.name}" 
+      								itemLabel="#{candidate.name}"/>
+        				</h:selectOneMenu>
+        			</td>
+        		</tr>
+        		<tr>
+        			<td colspan="2">
+        				<h:commandButton value="#{msg.vote}" rendered="#{!registrations.success}">
+        					<f:ajax event="click" listener="#{registrations.register()}" 
+        							execute="@form" render="@form" />
+        				</h:commandButton>			
+        				<h:outputText rendered="#{registrations.success}" value="#{msg.successfulRegistration}" />
+        			</td>
+        		</tr>
+        	</table>
+        </h:form>
     </h:body>
 </ui:composition>

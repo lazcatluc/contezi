@@ -1,20 +1,23 @@
 package ro.contezi.novote.controller;
 
-import javax.enterprise.context.SessionScoped;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
-import javax.inject.Named;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedBean;
 
 import ro.contezi.novote.model.Candidate;
 import ro.contezi.novote.repository.CandidatesRepository;
 
-import java.io.Serializable;
-import java.util.List;
-
-@Named("candidates")
+@ManagedBean(name = "candidates")
 @SessionScoped
 public class Candidates implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	private List<Candidate> allCandidates;
 	
 	@Inject
 	private CandidatesRepository candidatesRepository;
@@ -28,7 +31,12 @@ public class Candidates implements Serializable {
 	}
 
 	public List<Candidate> getAllCandidates() {
-		return candidatesRepository.getAllCandidates();
+		if (allCandidates == null) {
+			allCandidates = new ArrayList<>();
+			allCandidates.add(Candidate.SOMEONE);
+			allCandidates.addAll(candidatesRepository.getAllCandidates());
+		}
+		return allCandidates;
 	}
 
 }

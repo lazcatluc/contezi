@@ -1,13 +1,15 @@
 package ro.contezi.novote.repository;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import ro.contezi.novote.exception.MultipleRegistrationException;
 import ro.contezi.novote.model.Registration;
 
-public class SetRegistrationRepository implements RegistrationRepository {
+public class SetRegistrationRepository implements RegistrationRepository, Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private final Set<Registration> registrations = new HashSet<>();
 	
 	public SetRegistrationRepository() {

@@ -1,8 +1,8 @@
 package ro.contezi.novote;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.util.Collections;
+import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ public class CandidatesTest {
 		CandidatesRepository candidatesRepository = new CandidatesArray(Candidate.SOMEONE);
 		candidates.setCandidatesRepository(candidatesRepository);
 		
-		assertEquals(Collections.singletonList(Candidate.SOMEONE), candidates.getAllCandidates());
+		assertEquals(Arrays.asList(Candidate.SOMEONE, Candidate.SOMEONE), candidates.getAllCandidates());
 	}
 
 }
