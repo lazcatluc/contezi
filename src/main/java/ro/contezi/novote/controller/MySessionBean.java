@@ -1,4 +1,4 @@
-package ro.contezi.novote.changeMe.controller;
+package ro.contezi.novote.controller;
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
