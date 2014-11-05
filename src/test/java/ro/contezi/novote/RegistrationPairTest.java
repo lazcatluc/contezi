@@ -50,11 +50,41 @@ public class RegistrationPairTest {
 	}
 	
 	@Test
-	public void canPairRegistrationsToDifferentCandidatesInTheSameCity() throws Exception {
-		registrations().register(one, oneCandidate);
-		registrations().register(two, twoCandidate);
+	public void canPairRegistrationsOfFirstUserToDifferentCandidatesInTheSameCityInTheSameCountry() throws Exception {
+		addRegistrations();
 		
 		assertEquals(two, one.getPairedVoter());
+	}
+	
+	@Test
+	public void canPairRegistrationsOfSecondUserToDifferentCandidatesInTheSameCityInTheSameCountry() throws Exception {
+		addRegistrations();
+		
 		assertEquals(one, two.getPairedVoter());
+	}
+	
+	@Test
+	public void cannotPairIfDifferentCountry() throws Exception {
+		one.setCountry("Romania");
+		two.setCountry("Bulgaria");
+		
+		addRegistrations();
+		
+		assertFalse(one.hasPair());
+	}
+	
+	@Test
+	public void cannotPairIfDifferentCity() throws Exception {
+		one.setCity("Bucuresti");
+		two.setCity("Ploiesti");
+		
+		addRegistrations();
+		
+		assertFalse(one.hasPair());
+	}
+
+	protected void addRegistrations() {
+		registrations().register(one, oneCandidate);
+		registrations().register(two, twoCandidate);
 	}
 }
