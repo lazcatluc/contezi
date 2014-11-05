@@ -12,10 +12,24 @@ import ro.contezi.novote.model.User;
 import ro.contezi.novote.repository.SetRegistrationRepository;
 
 public class RegistrationPairTest {
+	private User one;
+	private User two;
+	private Candidate oneCandidate;
+	private Candidate twoCandidate;
 	
 	@Before
 	public void setUp() {
 		SetRegistrationRepository.REGISTRATIONS.clear();
+		one = new User();
+		one.setEmail("one@one.com");
+		one.setCnp("1");
+		two = new User();
+		two.setEmail("two@two.com");
+		one.setCnp("2");
+		oneCandidate = new Candidate();
+		oneCandidate.setName("One");
+		twoCandidate = new Candidate();
+		twoCandidate.setName("Two");
 	}
 	
 	private Registrations registrations() {
@@ -26,18 +40,7 @@ public class RegistrationPairTest {
 	
 	@Test
 	public void canFindPairForTwoAfterAddingOne() throws Exception {
-		User one = new User();
-		one.setEmail("one@one.com");
-		one.setCnp("1");
-		Candidate oneCandidate = new Candidate();
-		oneCandidate.setName("One");
 		Registration first = registrations().register(one, oneCandidate);
-		
-		User two = new User();
-		two.setEmail("two@two.com");
-		one.setCnp("2");
-		Candidate twoCandidate = new Candidate();
-		twoCandidate.setName("Two");
 		Registration second = new Registration();
 		second.setUser(two);
 		second.setCandidate(twoCandidate);
@@ -48,20 +51,8 @@ public class RegistrationPairTest {
 	
 	@Test
 	public void canPairRegistrationsToDifferentCandidatesInTheSameCity() throws Exception {
-		User one = new User();
-		one.setEmail("one@one.com");
-		one.setCnp("1");
-		Candidate oneCandidate = new Candidate();
-		oneCandidate.setName("One");
 		registrations().register(one, oneCandidate);
-		
-		User two = new User();
-		two.setEmail("two@two.com");
-		one.setCnp("2");
-		Candidate twoCandidate = new Candidate();
-		twoCandidate.setName("Two");
 		registrations().register(two, twoCandidate);
-		
 		
 		assertEquals(two, one.getPairedVoter());
 		assertEquals(one, two.getPairedVoter());

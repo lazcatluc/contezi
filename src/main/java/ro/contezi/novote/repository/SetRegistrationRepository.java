@@ -10,7 +10,6 @@ import java.util.Set;
 import ro.contezi.novote.exception.MultipleRegistrationException;
 import ro.contezi.novote.model.Candidate;
 import ro.contezi.novote.model.Registration;
-import ro.contezi.novote.model.User;
 
 public class SetRegistrationRepository implements RegistrationRepository, Serializable {
 
