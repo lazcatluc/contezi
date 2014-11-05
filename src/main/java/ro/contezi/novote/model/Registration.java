@@ -55,6 +55,11 @@ public class Registration implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Registration for " + user + " voting for " + candidate;
+	}
 	
 	
 }

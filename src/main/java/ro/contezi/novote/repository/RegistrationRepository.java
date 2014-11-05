@@ -9,4 +9,6 @@ public interface RegistrationRepository {
 	boolean hasEmailRegistration(String email);
 
 	boolean hasCnpRegistration(String cnp);
+
+	Registration findPairableRegistration(Registration registration);
 }

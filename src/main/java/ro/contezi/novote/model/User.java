@@ -13,6 +13,8 @@ public class User implements Serializable {
 	private String cnp = "";
 	private String city = "";
 	private String country = "";
+
+	private User pairedVoter = User.SOMEONE;
 	
 	public User() {
 		
@@ -72,6 +74,23 @@ public class User implements Serializable {
 		} else if (!email.equalsIgnoreCase(other.email))
 			return false;
 		return true;
+	}
+
+	public User getPairedVoter() {
+		return pairedVoter ;
+	}
+	
+	public void setPairedVoter(User pairedVoter) {
+		this.pairedVoter = pairedVoter;
+	}
+
+	public boolean hasPair() {
+		return !SOMEONE.equals(pairedVoter);
+	}
+
+	@Override
+	public String toString() {
+		return "User [name=" + name + ", email=" + email + "]";
 	}
 
 	
