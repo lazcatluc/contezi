@@ -1,11 +1,21 @@
 package ro.contezi.novote;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import ro.contezi.novote.controller.Registrations;
+import ro.contezi.novote.email.Email;
+import ro.contezi.novote.email.EmailBuilder;
+import ro.contezi.novote.email.Emailer;
+import ro.contezi.novote.email.SimpleEmailBuilder;
 import ro.contezi.novote.model.Candidate;
 import ro.contezi.novote.model.Registration;
 import ro.contezi.novote.model.User;
@@ -16,6 +26,8 @@ public class RegistrationPairTest {
 	private User two;
 	private Candidate oneCandidate;
 	private Candidate twoCandidate;
+	private Emailer emailer;
+	private EmailBuilder emailBuilder;
 	
 	@Before
 	public void setUp() {
@@ -30,11 +42,17 @@ public class RegistrationPairTest {
 		oneCandidate.setName("One");
 		twoCandidate = new Candidate();
 		twoCandidate.setName("Two");
+		emailer = mock(Emailer.class);
+		emailBuilder = new SimpleEmailBuilder();
+		when(emailer.getEmailBuilder()).thenReturn(emailBuilder);
 	}
 	
 	private Registrations registrations() {
 		Registrations registrations = new Registrations();
-		registrations.setRegistrationRepository(new SetRegistrationRepository());
+		SetRegistrationRepository registrationRepository = new SetRegistrationRepository();
+		registrations.setRegistrationRepository(registrationRepository);
+		registrationRepository.setEmailer(emailer);
+
 		return registrations;
 	}
 	
@@ -46,7 +64,13 @@ public class RegistrationPairTest {
 		second.setCandidate(twoCandidate);
 		
 		assertEquals(first, registrations().getRegistrationRepository().findPairableRegistration(second));
+	}
+
+	@Test
+	public void firstDoesntHavePairAfterAddingOne() throws Exception {
+		Registration first = registrations().register(one, oneCandidate);
 		
+		assertFalse(first.getUser().hasPair());
 	}
 	
 	@Test
@@ -81,6 +105,13 @@ public class RegistrationPairTest {
 		addRegistrations();
 		
 		assertFalse(one.hasPair());
+	}
+	
+	@Test
+	public void afterPairingEmailsAreSentToBoth() throws Exception {
+		addRegistrations();
+		
+		verify(emailer, times(2)).sendEmail(any(Email.class));
 	}
 
 	protected void addRegistrations() {

@@ -7,6 +7,12 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.inject.Inject;
+
+import ro.contezi.novote.config.Config;
+import ro.contezi.novote.email.Email;
+import ro.contezi.novote.email.EmailBuilder;
+import ro.contezi.novote.email.Emailer;
 import ro.contezi.novote.exception.MultipleRegistrationException;
 import ro.contezi.novote.model.Candidate;
 import ro.contezi.novote.model.Registration;
@@ -15,6 +21,15 @@ public class SetRegistrationRepository implements RegistrationRepository, Serial
 
 	private static final long serialVersionUID = 2L;
 	public static final Set<Registration> REGISTRATIONS = Collections.synchronizedSet(new HashSet<>());
+	
+	@Inject
+	private Emailer emailer;
+	
+	@Inject @Config
+	private String pairHasBeenFormed;
+	
+	@Inject @Config
+	private String pairHasBeenFormedBody;
 	
 	public SetRegistrationRepository() {
 	}
@@ -35,6 +50,17 @@ public class SetRegistrationRepository implements RegistrationRepository, Serial
 					}
 					pair.getUser().setPairedVoter(registration.getUser());
 					registration.getUser().setPairedVoter(pair.getUser());
+					EmailBuilder emailBuilder = getEmailer().getEmailBuilder()
+							.havingSubject(pairHasBeenFormed)
+							.havingBody(pairHasBeenFormedBody);
+					Email firstToSecond = emailBuilder
+							.from(registration.getUser().getEmail())
+							.to(pair.getUser().getEmail()).build();
+					Email secondToFirst = emailBuilder
+							.from(pair.getUser().getEmail())
+							.to(registration.getUser().getEmail()).build();
+					getEmailer().sendEmail(firstToSecond);
+					getEmailer().sendEmail(secondToFirst);
 				}
 			}
 			return;
@@ -64,6 +90,32 @@ public class SetRegistrationRepository implements RegistrationRepository, Serial
 	@Override
 	public boolean hasCnpRegistration(String cnp) {
 		return REGISTRATIONS.stream().anyMatch(registration -> Objects.equals(registration.getUser().getCnp(), cnp));
+	}
+
+	@Override
+	public Emailer getEmailer() {
+		return emailer;
+	}
+
+	@Override
+	public void setEmailer(Emailer emailer) {
+		this.emailer = emailer;
+	}
+
+	public String getPairHasBeenFormed() {
+		return pairHasBeenFormed;
+	}
+
+	public void setPairHasBeenFormed(String pairHasBeenFormed) {
+		this.pairHasBeenFormed = pairHasBeenFormed;
+	}
+
+	public String getPairHasBeenFormedBody() {
+		return pairHasBeenFormedBody;
+	}
+
+	public void setPairHasBeenFormedBody(String pairHasBeenFormedBody) {
+		this.pairHasBeenFormedBody = pairHasBeenFormedBody;
 	}
 
 }

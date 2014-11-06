@@ -1,5 +1,6 @@
 package ro.contezi.novote.repository;
 
+import ro.contezi.novote.email.Emailer;
 import ro.contezi.novote.exception.MultipleRegistrationException;
 import ro.contezi.novote.model.Registration;
 
@@ -11,4 +12,8 @@ public interface RegistrationRepository {
 	boolean hasCnpRegistration(String cnp);
 
 	Registration findPairableRegistration(Registration registration);
+
+	Emailer getEmailer();
+	
+	void setEmailer(Emailer emailer);
 }
