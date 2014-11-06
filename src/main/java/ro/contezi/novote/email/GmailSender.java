@@ -1,6 +1,7 @@
 package ro.contezi.novote.email;
 
 import java.io.Serializable;
+import java.security.cert.X509Certificate;
 import java.util.Properties;
 
 import javax.inject.Inject;
@@ -11,6 +12,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import ro.contezi.novote.config.Config;
 
@@ -24,6 +29,33 @@ public class GmailSender implements Emailer, Serializable {
 		GMAIL_PROPERTIES.put("mail.smtp.starttls.enable", "true");
 		GMAIL_PROPERTIES.put("mail.smtp.host", "smtp.gmail.com");
 		GMAIL_PROPERTIES.put("mail.smtp.port", "587");
+        
+        // Imports: javax.net.ssl.TrustManager, javax.net.ssl.X509TrustManager
+        try {
+            // Create a trust manager that does not validate certificate chains
+            final TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+                @Override
+                public void checkClientTrusted( final X509Certificate[] chain, final String authType ) {
+                }
+                @Override
+                public void checkServerTrusted( final X509Certificate[] chain, final String authType ) {
+                }
+                @Override
+                public X509Certificate[] getAcceptedIssuers() {
+                    return null;
+                }
+            } };
+
+            // Install the all-trusting trust manager
+            final SSLContext sslContext = SSLContext.getInstance( "SSL" );
+            sslContext.init( null, trustAllCerts, new java.security.SecureRandom() );
+            // Create an ssl socket factory with our all-trusting manager
+            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+            GMAIL_PROPERTIES.put("mail.smtp.ssl.socketFactory", sslSocketFactory);
+
+        } catch ( final Exception e ) {
+            throw new ExceptionInInitializerError(e);
+        }
 	}
 	
 	@Inject
