@@ -20,7 +20,7 @@ import ro.contezi.novote.model.Registration;
 
 public class SetRegistrationRepository implements RegistrationRepository, Serializable {
 
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 3L;
 	public static final Set<Registration> REGISTRATIONS = Collections.synchronizedSet(new HashSet<>());
 	
 	@Inject @Config
