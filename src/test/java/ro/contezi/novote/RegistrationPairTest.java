@@ -50,6 +50,7 @@ public class RegistrationPairTest {
 	private Registrations registrations() {
 		Registrations registrations = new Registrations();
 		SetRegistrationRepository registrationRepository = new SetRegistrationRepository();
+		registrationRepository.setPairHasBeenFormedBody("{0} {1} {2} {3}");
 		registrations.setRegistrationRepository(registrationRepository);
 		registrationRepository.setEmailer(emailer);
 

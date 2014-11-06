@@ -1,6 +1,7 @@
 package ro.contezi.novote.repository;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -22,7 +23,7 @@ public class SetRegistrationRepository implements RegistrationRepository, Serial
 	private static final long serialVersionUID = 2L;
 	public static final Set<Registration> REGISTRATIONS = Collections.synchronizedSet(new HashSet<>());
 	
-	@Inject
+	@Inject @Config
 	private Emailer emailer;
 	
 	@Inject @Config
@@ -40,7 +41,7 @@ public class SetRegistrationRepository implements RegistrationRepository, Serial
 		if (!REGISTRATIONS.add(registration)) {
 			throw new MultipleRegistrationException();
 		};
-
+		
 		while (true) {
 			Registration pair = findPairableRegistration(registration);
 			if (pair != Registration.SOMETHING) {
@@ -52,7 +53,9 @@ public class SetRegistrationRepository implements RegistrationRepository, Serial
 					registration.getUser().setPairedVoter(pair.getUser());
 					EmailBuilder emailBuilder = getEmailer().getEmailBuilder()
 							.havingSubject(pairHasBeenFormed)
-							.havingBody(pairHasBeenFormedBody);
+							.havingBody(MessageFormat.format(pairHasBeenFormedBody, 
+									registration.getUser().getName(), registration.getUser().getEmail(),
+									pair.getUser().getName(), pair.getUser().getEmail()));
 					Email firstToSecond = emailBuilder
 							.from(registration.getUser().getEmail())
 							.to(pair.getUser().getEmail()).build();
