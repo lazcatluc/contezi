@@ -11,6 +11,9 @@
 	<properties>
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<gmail.username>lazcatluc</gmail.username>
+		<gmail.password>changeme</gmail.password>
+		<gmail.realFrom>lazcatluc@gmail.com</gmail.realFrom>
 	</properties>
 
 	<dependencies>

@@ -15,7 +15,7 @@ import ro.contezi.novote.repository.RegistrationRepository;
 @SessionScoped
 public class Registrations implements Serializable {
 
-	private static final long serialVersionUID = 3L;
+	private static final long serialVersionUID = 4L;
 	
 	@Inject
 	private RegistrationRepository registrationRepository;
