@@ -29,6 +29,10 @@ public abstract class AbstractRegistrationRepository implements RegistrationRepo
 			throws MultipleRegistrationException {
 		persistRegistration(registration);
 		
+		emailRegistrationNotification(registration);
+	}
+
+	protected void emailRegistrationNotification(Registration registration) {
 		while (true) {
 			Registration pair = findPairableRegistration(registration);
 			if (pair != Registration.SOMETHING) {
