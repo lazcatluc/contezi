@@ -57,7 +57,7 @@ public class JpaRegistrationRepository extends AbstractRegistrationRepository im
 		CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Registration> query = builder.createQuery(Registration.class);
 		Root<Registration> registr = query.from(Registration.class);
-		Join<Registration, Voter> joinedVoter = registr.join("voter");
+		Join<Registration, Voter> joinedVoter = registr.join("user");
 		query.select(registr);
 		query.where(
 				builder.isNotNull(registr.get("candidate")),
