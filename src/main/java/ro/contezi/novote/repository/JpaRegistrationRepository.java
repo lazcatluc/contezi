@@ -29,6 +29,7 @@ public class JpaRegistrationRepository extends AbstractRegistrationRepository im
 	@Override
 	protected void persistRegistration(Registration registration) {
 		try {
+			getEntityManager().persist(registration.getUser());
 			getEntityManager().persist(registration);
 		}
 		catch (PersistenceException pe) {
