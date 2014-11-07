@@ -38,13 +38,6 @@ public class JpaRegistrationRepository extends AbstractRegistrationRepository im
 			throw new MultipleRegistrationException(pe);
 		}
 	}
-	
-	@Override
-	@Transactional(Transactional.TxType.REQUIRES_NEW)
-	@Asynchronous
-	public void emailRegistrationNotification(Registration registration) {
-		super.emailRegistrationNotification(registration);
-	};
 
 	@Override
 	public boolean hasEmailRegistration(String email) {

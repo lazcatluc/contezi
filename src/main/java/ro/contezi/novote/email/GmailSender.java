@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.security.cert.X509Certificate;
 import java.util.Properties;
 
+import javax.annotation.Resource;
+import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.inject.Inject;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -66,6 +68,9 @@ public class GmailSender implements Emailer, Serializable {
 	private String password;
 	@Inject @Config
 	private String realFrom;
+	
+	@Resource
+    private ManagedExecutorService mes;	
 
 	@Override
 	public void sendEmail(Email email) {
@@ -79,8 +84,17 @@ public class GmailSender implements Emailer, Serializable {
 			message.setReplyTo(InternetAddress.parse(email.getFrom()));
 			message.setSubject(email.getSubject());
 			message.setText(email.getBody());
-
-			Transport.send(message);
+			
+			mes.submit(new Runnable(){
+				@Override
+				public void run() {
+					try {
+						Transport.send(message);
+					} catch (MessagingException e) {
+						throw new RuntimeException(e);
+					}
+				}
+			});
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
