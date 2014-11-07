@@ -3,7 +3,6 @@ package ro.contezi.novote.repository;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,7 +11,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 
 import ro.contezi.novote.config.Config;
 import ro.contezi.novote.exception.MultipleRegistrationException;

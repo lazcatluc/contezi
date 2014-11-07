@@ -1,12 +1,8 @@
 package ro.contezi.novote.email;
 
-import com.sun.mail.smtp.SMTPTransport;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.security.cert.X509Certificate;
 import java.util.Properties;
-import java.util.logging.Level;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -14,7 +10,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
