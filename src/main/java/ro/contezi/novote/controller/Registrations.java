@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import ro.contezi.novote.model.Candidate;
 import ro.contezi.novote.model.Registration;
-import ro.contezi.novote.model.User;
+import ro.contezi.novote.model.Voter;
 import ro.contezi.novote.repository.RegistrationRepository;
 
 @ManagedBean(name = "registrations")
@@ -20,11 +20,11 @@ public class Registrations implements Serializable {
 	@Inject
 	private RegistrationRepository registrationRepository;
 	
-	private User currentUser = new User();
+	private Voter currentUser = new Voter();
 	private Candidate currentCandidate = new Candidate();
 	private boolean success;
 	
-	public Registration register(User user, Candidate candidate) {
+	public Registration register(Voter user, Candidate candidate) {
 		Registration registration = new Registration();
 		registration.setUser(user);
 		registration.setCandidate(candidate);
@@ -46,11 +46,11 @@ public class Registrations implements Serializable {
 		this.registrationRepository = registrationRepository;
 	}
 
-	public User getCurrentUser() {
+	public Voter getCurrentUser() {
 		return currentUser;
 	}
 
-	public void setCurrentUser(User currentUser) {
+	public void setCurrentUser(Voter currentUser) {
 		this.currentUser = currentUser;
 	}
 

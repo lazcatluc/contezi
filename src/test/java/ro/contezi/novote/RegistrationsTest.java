@@ -9,11 +9,11 @@ import ro.contezi.novote.controller.Registrations;
 import ro.contezi.novote.exception.MultipleRegistrationException;
 import ro.contezi.novote.model.Candidate;
 import ro.contezi.novote.model.Registration;
-import ro.contezi.novote.model.User;
+import ro.contezi.novote.model.Voter;
 import ro.contezi.novote.repository.SetRegistrationRepository;
 
 public class RegistrationsTest {
-	private User user = User.SOMEONE;
+	private Voter user = Voter.SOMEONE;
 	private Candidate candidate = Candidate.SOMEONE;
 	private Registrations registrations;
 	

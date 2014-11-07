@@ -2,21 +2,27 @@ package ro.contezi.novote.model;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Voter implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public static final User SOMEONE = new User();
+	public static final Voter SOMEONE = new Voter();
 	
 	private String name = "";
+	@Id
 	private String email = "";
 	private String cnp = "";
 	private String city = "";
 	private String country = "";
-
-	private User pairedVoter = User.SOMEONE;
+	@ManyToOne
+	private Voter pairedVoter;
 	
-	public User() {
+	public Voter() {
 		
 	}
 
@@ -67,7 +73,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Voter other = (Voter) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -76,16 +82,16 @@ public class User implements Serializable {
 		return true;
 	}
 
-	public User getPairedVoter() {
+	public Voter getPairedVoter() {
 		return pairedVoter ;
 	}
 	
-	public void setPairedVoter(User pairedVoter) {
+	public void setPairedVoter(Voter pairedVoter) {
 		this.pairedVoter = pairedVoter;
 	}
 
 	public boolean hasPair() {
-		return !SOMEONE.equals(pairedVoter);
+		return pairedVoter!=null && !SOMEONE.equals(pairedVoter);
 	}
 
 	@Override

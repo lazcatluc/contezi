@@ -6,24 +6,24 @@ public class Registration implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public static final Registration SOMETHING = new Registration(User.SOMEONE, Candidate.SOMEONE);
+	public static final Registration SOMETHING = new Registration(Voter.SOMEONE, Candidate.SOMEONE);
 	
-	private User user;
+	private Voter user;
 	private Candidate candidate;
 	
 	public Registration() {
 		
 	}
 	
-	public Registration(User someUser, Candidate someCandidate) {
+	public Registration(Voter someUser, Candidate someCandidate) {
 		this.user = someUser;
 		this.candidate = someCandidate;
 	}
 	
-	public User getUser() {
+	public Voter getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(Voter user) {
 		this.user = user;
 	}
 	public Candidate getCandidate() {

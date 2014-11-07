@@ -7,7 +7,8 @@ import org.junit.Test;
 public class UserTest {
 	@Test
 	public void newUserDoesntHavePair() throws Exception {
-		User user = new User();
+		Voter user = new Voter();
+		user.setPairedVoter(Voter.SOMEONE);
 		
 		assertFalse(user.hasPair());
 	}

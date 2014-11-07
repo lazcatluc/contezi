@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ro.contezi.novote.model.Registration;
-import ro.contezi.novote.model.User;
+import ro.contezi.novote.model.Voter;
 
 public class RegistrationRepositoryTest {
 	
@@ -22,13 +22,13 @@ public class RegistrationRepositoryTest {
 	public void hasEmailAfterAddingRegistration() throws Exception {
 		registrationRepository.saveRegistration(Registration.SOMETHING);
 		
-		assertTrue(registrationRepository.hasEmailRegistration(User.SOMEONE.getEmail()));
+		assertTrue(registrationRepository.hasEmailRegistration(Voter.SOMEONE.getEmail()));
 	}
 	
 	@Test
 	public void hasCnpAfterAddingRegistration() throws Exception {
 		registrationRepository.saveRegistration(Registration.SOMETHING);
 		
-		assertTrue(registrationRepository.hasCnpRegistration(User.SOMEONE.getCnp()));
+		assertTrue(registrationRepository.hasCnpRegistration(Voter.SOMEONE.getCnp()));
 	}
 }

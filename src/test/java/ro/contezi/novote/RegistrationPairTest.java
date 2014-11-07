@@ -18,12 +18,12 @@ import ro.contezi.novote.email.Emailer;
 import ro.contezi.novote.email.SimpleEmailBuilder;
 import ro.contezi.novote.model.Candidate;
 import ro.contezi.novote.model.Registration;
-import ro.contezi.novote.model.User;
+import ro.contezi.novote.model.Voter;
 import ro.contezi.novote.repository.SetRegistrationRepository;
 
 public class RegistrationPairTest {
-	private User one;
-	private User two;
+	private Voter one;
+	private Voter two;
 	private Candidate oneCandidate;
 	private Candidate twoCandidate;
 	private Emailer emailer;
@@ -32,10 +32,12 @@ public class RegistrationPairTest {
 	@Before
 	public void setUp() {
 		SetRegistrationRepository.REGISTRATIONS.clear();
-		one = new User();
+		one = new Voter();
+		one.setPairedVoter(Voter.SOMEONE);
 		one.setEmail("one@one.com");
 		one.setCnp("1");
-		two = new User();
+		two = new Voter();
+		two.setPairedVoter(Voter.SOMEONE);
 		two.setEmail("two@two.com");
 		one.setCnp("2");
 		oneCandidate = new Candidate();
