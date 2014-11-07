@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
+import ro.contezi.novote.config.Config;
 import ro.contezi.novote.model.Candidate;
 import ro.contezi.novote.model.Registration;
 import ro.contezi.novote.model.Voter;
@@ -15,9 +16,10 @@ import ro.contezi.novote.repository.RegistrationRepository;
 @SessionScoped
 public class Registrations implements Serializable {
 
-	private static final long serialVersionUID = 4L;
+	private static final long serialVersionUID = 5L;
 	
 	@Inject
+	@Config
 	private RegistrationRepository registrationRepository;
 	
 	private Voter currentUser = new Voter();

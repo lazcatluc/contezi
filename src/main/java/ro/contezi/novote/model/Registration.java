@@ -2,6 +2,7 @@ package ro.contezi.novote.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -14,7 +15,7 @@ public class Registration implements Serializable {
 	
 	public static final Registration SOMETHING = new Registration(Voter.SOMEONE, Candidate.SOMEONE);
 	@Id
-	@OneToOne
+	@OneToOne(cascade=CascadeType.PERSIST)
 	private Voter user;
 	@ManyToOne
 	private Candidate candidate;
