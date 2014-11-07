@@ -2,13 +2,21 @@ package ro.contezi.novote.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Registration implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	public static final Registration SOMETHING = new Registration(Voter.SOMEONE, Candidate.SOMEONE);
-	
+	@Id
+	@OneToOne
 	private Voter user;
+	@ManyToOne
 	private Candidate candidate;
 	
 	public Registration() {

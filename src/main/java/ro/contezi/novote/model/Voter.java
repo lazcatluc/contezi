@@ -36,7 +36,7 @@ public class Voter implements Serializable {
 		return email;
 	}
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = email.toLowerCase();
 	}
 	public String getCnp() {
 		return cnp;
@@ -61,7 +61,7 @@ public class Voter implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.toLowerCase().hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		return result;
 	}
 
@@ -77,7 +77,7 @@ public class Voter implements Serializable {
 		if (email == null) {
 			if (other.email != null)
 				return false;
-		} else if (!email.equalsIgnoreCase(other.email))
+		} else if (!email.equals(other.email))
 			return false;
 		return true;
 	}
