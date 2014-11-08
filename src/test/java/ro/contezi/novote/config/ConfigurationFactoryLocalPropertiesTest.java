@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class ConfigurationFactoryLocalPropertiesTest extends ConfigurationFactoryTest {
 
     private final InjectionPoint p = mockInjectionPoint("undefinedField", null);
-
+    
     /**
      * Test of getProperties method, of class ConfigurationFactoryLocalProperties.
      */
