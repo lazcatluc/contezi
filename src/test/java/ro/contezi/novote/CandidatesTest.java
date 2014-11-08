@@ -16,10 +16,12 @@ public class CandidatesTest {
 	@Test
 	public void userCanViewTheCandidates() throws Exception {
 		Candidates candidates = new Candidates();
+		candidates.setNoVoteIntention("noVote");
 		CandidatesRepository candidatesRepository = new CandidatesArray(Candidate.SOMEONE);
 		candidates.setCandidatesRepository(candidatesRepository);
 		
-		assertEquals(Arrays.asList(Candidate.SOMEONE, Candidate.SOMEONE), candidates.getAllCandidates());
+		assertEquals(Arrays.asList(Candidate.SOMEONE, Candidate.SOMEONE, new Candidate("noVote")), 
+				candidates.getAllCandidates());
 	}
 
 }
