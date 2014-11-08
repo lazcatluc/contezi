@@ -92,10 +92,22 @@
 							<f:ajax event="click" listener="#{registrations.register()}"
 								execute="@form" render="@form" />
 						</h:commandButton>
-						<h:outputText rendered="#{registrations.success}"
-							value="#{msg.successfulRegistration}" />
 					</p>
 				</div>
+				<h:panelGroup rendered="#{registrations.success}">
+					<div class="jumbotron">
+						<p class="lead">
+							<h:outputText value="#{msg.successfulRegistration}" />
+						</p>
+					</div>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{registrations.nonExistentCandidate}">
+					<div class="jumbotron">
+						<p class="lead">
+							<h:outputText value="#{msg.nullVote}" />
+						</p>
+					</div>
+				</h:panelGroup>
 			</h:form>
 			<div class="footer">
 				<p>&copy; 2014 Cătălin Lazar &amp; Ștefan David</p>

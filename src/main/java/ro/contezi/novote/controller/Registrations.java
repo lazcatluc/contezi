@@ -29,11 +29,15 @@ public class Registrations implements Serializable {
 
 	@Inject
 	private CandidatesRepository candidatesRepository;
+
+	private boolean nonExistentCandidate;
 	
 	public Registration register(Voter user, Candidate candidate) {
 		if (!candidatesRepository.getAllCandidates().contains(candidate)) {
+			nonExistentCandidate = true;
 			return Registration.SOMETHING;
 		}
+		nonExistentCandidate = false;
 		Registration registration = new Registration();
 		registration.setUser(user);
 		registration.setCandidate(candidate);
@@ -82,6 +86,14 @@ public class Registrations implements Serializable {
 	
 	public CandidatesRepository getCandidatesRepository() {
 		return candidatesRepository;
+	}
+
+	public boolean isNonExistentCandidate() {
+		return nonExistentCandidate;
+	}
+	
+	public void setNonExistentCandidate(boolean nonExistentCandidate) {
+		this.nonExistentCandidate = nonExistentCandidate;
 	}
 
 }

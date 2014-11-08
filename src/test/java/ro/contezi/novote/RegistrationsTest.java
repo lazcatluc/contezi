@@ -64,6 +64,21 @@ public class RegistrationsTest {
 		assertFalse(registrations.isSuccess());
 	}
 	
+	@Test
+	public void remembersNonExistentCandidate() throws Exception {
+		registrations.register(user, new Candidate("Somebody Else"));
+		
+		assertTrue(registrations.isNonExistentCandidate());
+	}
+	
+	@Test
+	public void votingAfterChoosingNonExistentCandidateForgetsNonExistentCandidate() throws Exception {
+		registrations.register(user, new Candidate("Somebody Else"));
+		registrations.register();
+		
+		assertFalse(registrations.isNonExistentCandidate());
+	}
+	
 	@Test(expected = MultipleRegistrationException.class)
 	public void userCannotRegisterTwiceForACandidate() throws Exception {
 		registrations.register();
