@@ -14,6 +14,7 @@
 		<gmail.username>lazcatluc</gmail.username>
 		<gmail.password>changeme</gmail.password>
 		<gmail.realFrom>lazcatluc@gmail.com</gmail.realFrom>
+		<hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
 	</properties>
 	<repositories>
 		<repository>

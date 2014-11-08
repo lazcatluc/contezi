@@ -4,7 +4,7 @@
     <jta-data-source>java:jboss/datasources/ConteziDS</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <!-- property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/ -->
+      <property name="hibernate.dialect" value="${hibernate.dialect}"/>
       <property name="hibernate.hbm2ddl.auto" value="update"/>
     </properties>
   </persistence-unit>
