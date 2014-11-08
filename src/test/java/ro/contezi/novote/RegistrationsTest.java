@@ -1,6 +1,9 @@
 package ro.contezi.novote;
 
+import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
+
+import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,19 +13,26 @@ import ro.contezi.novote.exception.MultipleRegistrationException;
 import ro.contezi.novote.model.Candidate;
 import ro.contezi.novote.model.Registration;
 import ro.contezi.novote.model.Voter;
+import ro.contezi.novote.repository.CandidatesRepository;
 import ro.contezi.novote.repository.SetRegistrationRepository;
 
 public class RegistrationsTest {
 	private Voter user = Voter.SOMEONE;
-	private Candidate candidate = Candidate.SOMEONE;
+	private Candidate candidate;
+	private CandidatesRepository candidatesRepository;
 	private Registrations registrations;
 	
 	@Before
 	public void setUp() {
 		registrations = new Registrations();
+		candidate = new Candidate("candidate");
 		registrations.setCurrentCandidate(candidate);
 		registrations.setCurrentUser(user);
 		registrations.setRegistrationRepository(new SetRegistrationRepository());
+		candidatesRepository = mock(CandidatesRepository.class);
+		when(candidatesRepository.getAllCandidates()).thenReturn(Collections.singletonList(candidate));
+		registrations.setCandidatesRepository(candidatesRepository);
+		
 		SetRegistrationRepository.REGISTRATIONS.clear();
 	}
 	
@@ -45,6 +55,13 @@ public class RegistrationsTest {
 		registrations.register();
 		
 		assertTrue(registrations.isSuccess());
+	}
+	
+	@Test
+	public void doesNotRegisterNonExistentCandidate() throws Exception {
+		registrations.register(user, new Candidate("Somebody Else"));
+		
+		assertFalse(registrations.isSuccess());
 	}
 	
 	@Test(expected = MultipleRegistrationException.class)

@@ -10,6 +10,7 @@ import ro.contezi.novote.config.Config;
 import ro.contezi.novote.model.Candidate;
 import ro.contezi.novote.model.Registration;
 import ro.contezi.novote.model.Voter;
+import ro.contezi.novote.repository.CandidatesRepository;
 import ro.contezi.novote.repository.RegistrationRepository;
 
 @ManagedBean(name = "registrations")
@@ -25,8 +26,14 @@ public class Registrations implements Serializable {
 	private Voter currentUser = new Voter();
 	private Candidate currentCandidate = new Candidate();
 	private boolean success;
+
+	@Inject
+	private CandidatesRepository candidatesRepository;
 	
 	public Registration register(Voter user, Candidate candidate) {
+		if (!candidatesRepository.getAllCandidates().contains(candidate)) {
+			return Registration.SOMETHING;
+		}
 		Registration registration = new Registration();
 		registration.setUser(user);
 		registration.setCandidate(candidate);
@@ -66,6 +73,15 @@ public class Registrations implements Serializable {
 
 	public boolean isSuccess() {
 		return success;
+	}
+
+	public void setCandidatesRepository(
+			CandidatesRepository candidatesRepository) {
+		this.candidatesRepository = candidatesRepository;
+	}
+	
+	public CandidatesRepository getCandidatesRepository() {
+		return candidatesRepository;
 	}
 
 }

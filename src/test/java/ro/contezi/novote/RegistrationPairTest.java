@@ -8,6 +8,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,6 +21,7 @@ import ro.contezi.novote.email.SimpleEmailBuilder;
 import ro.contezi.novote.model.Candidate;
 import ro.contezi.novote.model.Registration;
 import ro.contezi.novote.model.Voter;
+import ro.contezi.novote.repository.CandidatesRepository;
 import ro.contezi.novote.repository.SetRegistrationRepository;
 
 public class RegistrationPairTest {
@@ -55,6 +58,9 @@ public class RegistrationPairTest {
 		registrationRepository.setPairHasBeenFormedBody("{0} {1} {2} {3}");
 		registrations.setRegistrationRepository(registrationRepository);
 		registrationRepository.setEmailer(emailer);
+		CandidatesRepository candidatesRepository = mock(CandidatesRepository.class);
+		when(candidatesRepository.getAllCandidates()).thenReturn(Arrays.asList(oneCandidate, twoCandidate));
+		registrations.setCandidatesRepository(candidatesRepository);
 
 		return registrations;
 	}
