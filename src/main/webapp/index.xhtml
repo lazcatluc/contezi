@@ -1,100 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>
-        	<h:outputText value="#{msg.title}" />
-        </title>
-    </h:head>
-    <h:body>
-        <h:outputText value="#{msg.welcomeMessage}" />
-        <h:form>
-        	<table>
-        		<tr>
-        			<td>
-        				<h:outputText value="#{msg.name}" />			
-        			</td>
-        			<td>
-        				<h:inputText id="name" value="#{registrations.currentUser.name}" />
-        			</td>
-        			<td>
-        				<h:message for="name" />
-        			</td>
-        		</tr>
-        		<tr>
-        			<td>
-        				<h:outputText value="#{msg.email}" />			
-        			</td>
-        			<td>
-        				<h:inputText id="email" value="#{registrations.currentUser.email}" 
-        							 validator="#{emailValidator.emailValidator}" />
-        			</td>
-        			<td>
-        				<h:message for="email" />
-        			</td>
-        		</tr>
-        		<tr>
-        			<td>
-        				<h:outputText value="#{msg.cnp}" />			
-        			</td>
-        			<td>
-        				<h:inputText id="cnp" value="#{registrations.currentUser.cnp}" 
-        							 validator="#{cnpValidator.cnpValidator}" />
-        			</td>
-        			<td>
-        				<h:message for="cnp" />
-        			</td>
-        		</tr>
-        		<tr>
-        			<td>
-        				<h:outputText value="#{msg.city}" />			
-        			</td>
-        			<td>
-        				<h:inputText id="city" value="#{registrations.currentUser.city}" />
-        			</td>
-        			<td>
-        				<h:message for="city" />
-        			</td>
-        		</tr>
-        		<tr>
-        			<td>
-        				<h:outputText value="#{msg.country}" />			
-        			</td>
-        			<td>
-        				<h:inputText id="country" value="#{registrations.currentUser.country}" />
-        			</td>
-        			<td>
-        				<h:message for="country" />
-        			</td>
-        		</tr>
-        		<tr>
-        			<td>
-        				<h:outputText value="#{msg.candidate}" />			
-        			</td>
-        			<td>
-        				<h:selectOneMenu id="candidate" value="#{registrations.currentCandidate.name}">
-        					<f:selectItems value="#{candidates.allCandidates}" 
-      								var="candidate"
-      								itemValue="#{candidate.name}" 
-      								itemLabel="#{candidate.name}"/>
-        				</h:selectOneMenu>
-        			</td>
-        			<td>
-        				<h:message for="candidate" />
-        			</td>
-        		</tr>
-        		<tr>
-        			<td colspan="3">
-        				<h:commandButton value="#{msg.vote}" rendered="#{!registrations.success}">
-        					<f:ajax event="click" listener="#{registrations.register()}" 
-        							execute="@form" render="@form" />
-        				</h:commandButton>			
-        				<h:outputText rendered="#{registrations.success}" value="#{msg.successfulRegistration}" />
-        			</td>
-        		</tr>
-        	</table>
-        </h:form>
-    </h:body>
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<link rel="icon" href="/favicon.ico" />
+		<title>Contezi fără să votezi</title>
+		<!-- Bootstrap core CSS -->
+		<link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+		<!-- Custom styles for this template -->
+		<link href="/css/jumbotron-narrow.css" rel="stylesheet" />
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	</h:head>
+	<h:body>
+		<div class="container">
+			<div class="header">
+				<ul class="nav nav-pills pull-right" role="tablist">
+					<li role="presentation"><a href="/">Home</a></li>
+					<li role="presentation" class="active"><a href="/novote">Contezi</a></li>
+					<li role="presentation"><a href="/istoric.html">Istoric</a></li>
+					<li role="presentation"><a href="/about.html">Despre noi</a></li>
+				</ul>
+				<h3 class="text-muted">
+					<a href="/">Contezi.ro</a>
+				</h3>
+			</div>
+			<h:form>
+				<div class="jumbotron">
+					<p class="lead">
+						<table>
+							<tr>
+								<td><h:outputText value="#{msg.name}" /></td>
+								<td><h:inputText id="name"
+										value="#{registrations.currentUser.name}" /></td>
+								<td><h:message for="name" /></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="#{msg.email}" /></td>
+								<td><h:inputText id="email"
+										value="#{registrations.currentUser.email}"
+										validator="#{emailValidator.emailValidator}" /></td>
+								<td><h:message for="email" /></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="#{msg.cnp}" /></td>
+								<td><h:inputText id="cnp"
+										value="#{registrations.currentUser.cnp}"
+										validator="#{cnpValidator.cnpValidator}" /></td>
+								<td><h:message for="cnp" /></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="#{msg.city}" /></td>
+								<td><h:inputText id="city"
+										value="#{registrations.currentUser.city}" /></td>
+								<td><h:message for="city" /></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="#{msg.country}" /></td>
+								<td><h:inputText id="country"
+										value="#{registrations.currentUser.country}" /></td>
+								<td><h:message for="country" /></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="#{msg.candidate}" /></td>
+								<td><h:selectOneMenu id="candidate"
+										value="#{registrations.currentCandidate.name}">
+										<f:selectItems value="#{candidates.allCandidates}"
+											var="candidate" itemValue="#{candidate.name}"
+											itemLabel="#{candidate.name}" />
+									</h:selectOneMenu></td>
+								<td><h:message for="candidate" /></td>
+							</tr>
+						</table>
+					</p>
+					<p>
+						<h:commandButton styleClass="btn btn-lg btn-success" value="#{msg.vote}"
+							rendered="#{!registrations.success}">
+							<f:ajax event="click" listener="#{registrations.register()}"
+								execute="@form" render="@form" />
+						</h:commandButton>
+						<h:outputText rendered="#{registrations.success}"
+							value="#{msg.successfulRegistration}" />
+					</p>
+				</div>
+			</h:form>
+			<div class="footer">
+				<p>&copy; 2014 Cătălin Lazar &amp; Ștefan David</p>
+			</div>
+
+		</div>
+		<!-- /container -->
+
+
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script src="/js/ie10-viewport-bug-workaround.js"></script>
+	</h:body>
 </ui:composition>
