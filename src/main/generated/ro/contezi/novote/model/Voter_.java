@@ -9,6 +9,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Voter_ {
 
 	public static volatile SingularAttribute<Voter, String> country;
+	public static volatile SingularAttribute<Voter, String> address;
 	public static volatile SingularAttribute<Voter, String> cnp;
 	public static volatile SingularAttribute<Voter, String> city;
 	public static volatile SingularAttribute<Voter, String> name;

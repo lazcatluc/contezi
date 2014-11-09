@@ -15,7 +15,7 @@
 		<gmail.password>changeme</gmail.password>
 		<gmail.realFrom>lazcatluc@gmail.com</gmail.realFrom>
 		<hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
-		<hibernate.hbm2ddl.auto>none</hibernate.hbm2ddl.auto>
+		<hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
 	</properties>
 	<repositories>
 		<repository>

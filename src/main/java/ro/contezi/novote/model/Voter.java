@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Voter implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	public static final Voter SOMEONE = new Voter();
 	
@@ -19,6 +19,7 @@ public class Voter implements Serializable {
 	private String cnp = "";
 	private String city = "";
 	private String country = "";
+	private String address = "";
 	@ManyToOne
 	private Voter pairedVoter;
 	
@@ -97,6 +98,14 @@ public class Voter implements Serializable {
 	@Override
 	public String toString() {
 		return "User [name=" + name + ", email=" + email + "]";
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	
