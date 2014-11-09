@@ -1,0 +1,13 @@
+ul {
+	list-style: none;
+}
+
+.q {
+	font-weight: bold;
+	margin-left: -25px;
+}
+
+.r {
+	margin-left: 25px;
+	margin-bottom: 10px;
+}

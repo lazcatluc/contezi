@@ -46,7 +46,11 @@
 					<a href="/">Contezi.ro</a>
 				</h3>
 			</div>
+			
 			<div class="hero-unit">
+				
+		        <h2 style="margin-top:-30px; margin-bottom: 30px;">Contezi pentru noi</h2>
+		      	
 				<h:form id="registrationForm" styleClass="form-horizontal">
 
 					<div class="control-group">
@@ -88,7 +92,7 @@
 						<label class="control-label" for="locality"><h:outputText
 								value="#{msg.city}" /></label>
 						<div class="controls">
-							<h:inputText id="locality" value="#{registrations.currentUser.city}" />
+							<h:inputText id="locality" value="#{registrations.currentUser.city}"  />
 							<h:message for="locality" styleClass="error" />
 						</div>
 					</div>
@@ -138,6 +142,9 @@
 						</div>
 					</h:panelGroup>
 				</h:form>
+			</div>
+			<div style="margin-bottom:20px;">
+				Contezi.ro nu te va spama niciodată, sub nicio formă. Contezi.ro nu va publica datele tale către nimeni [emailul tău va fi comunicat perechii tale la fel cum și tu vei primi adresa sa]. După terminarea campaniei, vom șterge datele tale din baza noastră de date.
 			</div>
 			<div class="footer">
 				<p>&copy; 2014 Cătălin Lazăr &amp; Ștefan David</p>
