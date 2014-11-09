@@ -12,6 +12,7 @@ import javax.faces.validator.RegexValidator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 
+import ro.contezi.novote.config.Config;
 import ro.contezi.novote.repository.RegistrationRepository;
 
 @ManagedBean(name = "cnpValidator")
@@ -25,6 +26,7 @@ public class CnpValidator implements Serializable {
 	private static final String PATTERN = "[0-9]{13}";
 	
 	@Inject
+	@Config
 	private RegistrationRepository registrationRepository;	
 
 	@ManagedProperty("#{msg.duplicateCnp}")
@@ -33,6 +35,8 @@ public class CnpValidator implements Serializable {
 	private String incorrectCnpFormat;
 	@ManagedProperty("#{msg.incorrectCnp}")
 	private String incorrectCnp;
+	
+	private String cnpClass = "";
 	
 	public static long getChecksum(long cnpWithoutLastDigit) {
 		long sum = 0;
@@ -57,20 +61,24 @@ public class CnpValidator implements Serializable {
 	}
 
 	public void cnpValidator(FacesContext context, UIComponent component, Object params) {
+		cnpClass = "";
 		RegexValidator emailValidator = new RegexValidator();
 		emailValidator.setPattern(PATTERN);
 		try {
 			emailValidator.validate(context, component, params);
 		}
 		catch(ValidatorException ve) {
+			cnpClass = "error";
 			throw new ValidatorException(new FacesMessage(getIncorrectCnpFormat()));
 		}
 		
 		if (!validateCnp(params.toString())) {
+			cnpClass = "error";
 			throw new ValidatorException(new FacesMessage(getIncorrectCnp()));
 		}
 		
-		if (getRegistrationRepository().hasEmailRegistration(params.toString())) {
+		if (getRegistrationRepository().hasCnpRegistration(params.toString())) {
+			cnpClass = "error";
 			throw new ValidatorException(new FacesMessage(getDuplicateCnpMessage()));
 		}
 	}
@@ -105,6 +113,14 @@ public class CnpValidator implements Serializable {
 
 	public void setIncorrectCnp(String incorrectCnp) {
 		this.incorrectCnp = incorrectCnp;
+	}
+
+	public String getCnpClass() {
+		return cnpClass;
+	}
+
+	public void setCnpClass(String cnpClass) {
+		this.cnpClass = cnpClass;
 	}
 
 }

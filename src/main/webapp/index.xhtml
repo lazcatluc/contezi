@@ -14,11 +14,14 @@
 		<link rel="icon" href="/favicon.ico" />
 		<title>Contezi fără să votezi</title>
 		<!-- Bootstrap core CSS -->
-		<link href="/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css"
+			href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+		<script type="text/javascript"
+			src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 
 		<!-- Custom styles for this template -->
 		<link href="/css/jumbotron-narrow.css" rel="stylesheet" />
-
+		<link rel="stylesheet" type="text/css" href="/css/novote.css" />
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -38,77 +41,91 @@
 					<a href="/">Contezi.ro</a>
 				</h3>
 			</div>
-			<h:form>
-				<div class="jumbotron">
-					<p class="lead">
-						<table>
-							<tr>
-								<td><h:outputText value="#{msg.name}" /></td>
-								<td><h:inputText id="name"
-										value="#{registrations.currentUser.name}" /></td>
-								<td><h:message for="name" /></td>
-							</tr>
-							<tr>
-								<td><h:outputText value="#{msg.email}" /></td>
-								<td><h:inputText id="email"
-										value="#{registrations.currentUser.email}"
-										validator="#{emailValidator.emailValidator}" /></td>
-								<td><h:message for="email" /></td>
-							</tr>
-							<tr>
-								<td><h:outputText value="#{msg.cnp}" /></td>
-								<td><h:inputText id="cnp"
-										value="#{registrations.currentUser.cnp}"
-										validator="#{cnpValidator.cnpValidator}" /></td>
-								<td><h:message for="cnp" /></td>
-							</tr>
-							<tr>
-								<td><h:outputText value="#{msg.city}" /></td>
-								<td><h:inputText id="city"
-										value="#{registrations.currentUser.city}" /></td>
-								<td><h:message for="city" /></td>
-							</tr>
-							<tr>
-								<td><h:outputText value="#{msg.country}" /></td>
-								<td><h:inputText id="country"
-										value="#{registrations.currentUser.country}" /></td>
-								<td><h:message for="country" /></td>
-							</tr>
-							<tr>
-								<td><h:outputText value="#{msg.candidate}" /></td>
-								<td><h:selectOneMenu id="candidate"
-										value="#{registrations.currentCandidate.name}">
-										<f:selectItems value="#{candidates.allCandidates}"
-											var="candidate" itemValue="#{candidate.name}"
-											itemLabel="#{candidate.name}" />
-									</h:selectOneMenu></td>
-								<td><h:message for="candidate" /></td>
-							</tr>
-						</table>
-					</p>
-					<p>
-						<h:commandButton styleClass="btn btn-lg btn-success" value="#{msg.vote}"
-							rendered="#{!registrations.success}">
-							<f:ajax event="click" listener="#{registrations.register()}"
-								execute="@form" render="@form" />
-						</h:commandButton>
-					</p>
-				</div>
-				<h:panelGroup rendered="#{registrations.success}">
-					<div class="jumbotron">
-						<p class="lead">
-							<h:outputText value="#{msg.successfulRegistration}" />
-						</p>
+			<div class="hero-unit">
+				<h:form styleClass="form-horizontal">
+
+					<div class="control-group">
+						<label class="control-label" for="name"><h:outputText
+								value="#{msg.name}" /></label>
+						<div class="controls">
+							<h:inputText id="name" value="#{registrations.currentUser.name}" />
+							<h:message for="name" styleClass="error" />
+						</div>
 					</div>
-				</h:panelGroup>
-				<h:panelGroup rendered="#{registrations.nonExistentCandidate}">
-					<div class="jumbotron">
-						<p class="lead">
-							<h:outputText value="#{msg.nullVote}" />
-						</p>
+					<div class="control-group #{emailValidator.emailClass}">
+						<label class="control-label" for="email"><h:outputText
+								value="#{msg.email}" /></label>
+						<div class="controls">
+							<h:inputText id="email"
+								value="#{registrations.currentUser.email}"
+								validator="#{emailValidator.emailValidator}" />
+							<h:message for="email" styleClass="error" />
+						</div>
 					</div>
-				</h:panelGroup>
-			</h:form>
+					<div class="control-group #{cnpValidator.cnpClass}">
+						<label class="control-label" for="cnp"><h:outputText
+								value="#{msg.cnp}" /></label>
+						<div class="controls">
+							<h:inputText id="cnp" value="#{registrations.currentUser.cnp}"
+								validator="#{cnpValidator.cnpValidator}" />
+							<h:message for="cnp" styleClass="error" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="city"><h:outputText
+								value="#{msg.city}" /></label>
+						<div class="controls">
+							<h:inputText id="city" value="#{registrations.currentUser.city}" />
+							<h:message for="city" styleClass="error" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="country"><h:outputText
+								value="#{msg.country}" /></label>
+						<div class="controls">
+							<h:inputText id="country"
+								value="#{registrations.currentUser.country}" />
+							<h:message for="country" styleClass="error" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="candidate"><h:outputText
+								value="#{msg.candidate}" /></label>
+						<div class="controls">
+							<h:selectOneMenu id="candidate"
+								value="#{registrations.currentCandidate.name}">
+								<f:selectItems value="#{candidates.allCandidates}"
+									var="candidate" itemValue="#{candidate.name}"
+									itemLabel="#{candidate.name}" />
+							</h:selectOneMenu>
+							<h:message for="candidate" styleClass="error" />
+						</div>
+					</div>
+					<h:panelGroup rendered="#{!registrations.success}">
+						<div class="form-actions">
+							<h:commandButton styleClass="btn btn-success" value="#{msg.vote}">
+								<f:ajax event="click" listener="#{registrations.register()}"
+									execute="@form" render="@form" />
+							</h:commandButton>
+						</div>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{registrations.success}">
+						<div class="jumbotron">
+							<p class="lead">
+								<h:outputText value="#{msg.successfulRegistration}" />
+							</p>
+						</div>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{registrations.nonExistentCandidate}">
+						<div class="jumbotron">
+							<p class="lead">
+								<h:outputText value="#{msg.nullVote}" />
+							</p>
+						</div>
+					</h:panelGroup>
+				</h:form>
+			</div>
 			<div class="footer">
 				<p>&copy; 2014 Cătălin Lazar &amp; Ștefan David</p>
 			</div>
