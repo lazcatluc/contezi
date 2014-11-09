@@ -10,6 +10,7 @@
 	<meta property="og:image" content="http://contezi.ro/votat.png" />
 	<meta property="og:site_name" content="Contezi.ro" />
 	<meta property="og:description" content='Ești un cetățean român în diaspora care crede că opinia lui contează? În sfârșit, cineva este de partea ta. Transformă adevărul universal "Votezi fără să contezi" în "Contezi fără să votezi"!' />
+	<meta property="fb:app_id" content="296028757252607" />
     <link rel="icon" href="/favicon.ico">
 
     <title>Contezi fără să votezi</title>
@@ -28,7 +29,23 @@
   </head>
 
   <body>
+	<script>
+	  window.fbAsyncInit = function() {
+		FB.init({
+		  appId      : '296028757252607',
+		  xfbml      : true,
+		  version    : 'v2.2'
+		});
+	  };
 
+	  (function(d, s, id){
+		 var js, fjs = d.getElementsByTagName(s)[0];
+		 if (d.getElementById(id)) {return;}
+		 js = d.createElement(s); js.id = id;
+		 js.src = "//connect.facebook.net/en_US/sdk.js";
+		 fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+	</script>
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
@@ -74,10 +91,11 @@
         <p class="lead"> În sfârșit, cineva este de partea ta. Transformă adevărul universal "Votezi fără să contezi" în "Contezi fără să votezi"!</p>
         <p><a class="btn btn-lg btn-success" href="/novote" role="button">Înscrie-te acum!</a></p>
 	  </div>
+	  
       <div class="footer">
         <p>&copy; 2014 Cătălin Lazăr &amp; Ștefan David</p>
       </div>
-
+	  <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
     </div> <!-- /container -->
 
 

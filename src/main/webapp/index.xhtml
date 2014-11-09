@@ -37,6 +37,23 @@
     	<script src="/js/autocomplete.js"></script>
 	</h:head>
 	<h:body onload="initialize()">
+		<script>
+		  window.fbAsyncInit = function() {
+			FB.init({
+			  appId      : '296028757252607',
+			  xfbml      : true,
+			  version    : 'v2.2'
+			});
+		  };
+	
+		  (function(d, s, id){
+			 var js, fjs = d.getElementsByTagName(s)[0];
+			 if (d.getElementById(id)) {return;}
+			 js = d.createElement(s); js.id = id;
+			 js.src = "//connect.facebook.net/en_US/sdk.js";
+			 fjs.parentNode.insertBefore(js, fjs);
+		   }(document, 'script', 'facebook-jssdk'));
+		</script>
 		<div class="container">
 			<div class="header">
 				<ul class="nav nav-pills pull-right" role="tablist">
@@ -149,10 +166,11 @@
 			<div style="margin-bottom:20px;">
 				Contezi.ro nu te va spama niciodată, sub nicio formă. Contezi.ro nu va publica datele tale către nimeni [emailul tău va fi comunicat perechii tale la fel cum și tu vei primi adresa sa]. După terminarea campaniei, vom șterge datele tale din baza noastră de date.
 			</div>
+			
 			<div class="footer">
 				<p>&copy; 2014 Cătălin Lazăr &amp; Ștefan David</p>
 			</div>
-
+			<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
 		</div>
 		<!-- /container -->
 
